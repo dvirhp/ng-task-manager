@@ -9,10 +9,7 @@ export const validateParams = (schema: any) => {
     // Throw an error if validation fails
     if (error) {
       const messages = error.details.map((d: any) => d.message);
-      throw new AppError(
-        `Parameter validation failed: ${messages.join(", ")}`,
-        400,
-      );
+      throw new AppError(`Parameter validation failed: ${messages.join(", ")}`, 400);
     }
 
     // Continue if parameters are valid

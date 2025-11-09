@@ -1,0 +1,64 @@
+<div class="page-container" dir="ltr">
+
+  <!-- Page header -->
+  <div class="page-header">
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+  </div>
+
+  <!-- Add new list button -->
+  <div class="add-btn-container">
+    <button mat-raised-button color="primary" (click)="openDialog('add')">
+      <mat-icon>add</mat-icon>
+      Add new list
+    </button>
+  </div>
+
+  <!-- Lists section -->
+  <ng-container *ngIf="items$ | async as lists; else loading">
+    <div *ngIf="lists.length > 0; else empty" class="list-cards">
+      <mat-card *ngFor="let list of lists" class="list-card">
+        <div class="list-content">
+
+          <!-- List details -->
+          <div class="list-details">
+            <a
+              class="list-title"
+              [routerLink]="['/lists', list._id, 'tasks']"
+              [queryParams]="{ title: list.title }"
+              matTooltip="Click to open list"
+            >
+              {{ list.title }}
+            </a>
+            <p class="list-description">{{ list.description || 'No description' }}</p>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="actions">
+            <button mat-icon-button color="accent" (click)="openDialog('edit', list)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="openSharePage(list)">
+              <mat-icon>share</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteEntity(list._id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+
+  <!-- Empty state message -->
+  <ng-template #empty>
+    <mat-card class="empty"> No to-do lists yet </mat-card>
+  </ng-template>
+
+  <!-- Loading spinner -->
+  <ng-template #loading>
+    <div class="spinner-container">
+      <mat-spinner color="accent"></mat-spinner>
+    </div>
+  </ng-template>
+</div>

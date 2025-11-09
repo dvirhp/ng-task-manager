@@ -32,3 +32,10 @@ export const colorSchema = Joi.string()
   .messages({
     "string.pattern.base": "Invalid color format",
   });
+
+// Shared reusable param schemas
+export const paramSchemas = {
+  id: Joi.object({ id: objectIdSchema.required() }),
+  userId: Joi.object({ userId: objectIdSchema.required() }),
+  listId: Joi.object({ listId: objectIdSchema.required() }),
+};

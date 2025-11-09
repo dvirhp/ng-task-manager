@@ -1,0 +1,75 @@
+.dialog-wrapper {
+  direction: ltr;
+  text-align: left;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+
+  h2 {
+    margin: 0;
+    font-weight: 700;
+    color: #1565c0;
+    font-size: 1.4rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .input-field,
+    .textarea-field {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      box-sizing: border-box;
+
+      &:focus {
+        border-color: #1976d2;
+      }
+    }
+
+    .textarea-field {
+      resize: none;
+      line-height: 1.4;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+
+    button {
+      font-weight: 600;
+      text-transform: none;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .responsive-dialog {
+    width: 90vw !important;
+    max-width: 90vw;
+    padding: 1rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+
+    button {
+      width: 100%;
+    }
+  }
+}

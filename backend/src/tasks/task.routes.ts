@@ -2,40 +2,17 @@ import { Router } from "express";
 import { TaskController } from "./task.controller.js";
 import { validateBody } from "../middlewares/validation/validateBody.middleware.js";
 import { validateParams } from "../middlewares/validation/validateParams.middleware.js";
-import {
-  createTaskSchema,
-  updateTaskSchema,
-  paramIdSchema,
-  paramListIdSchema,
-} from "../utils/validation/taskSchemas.js";
+import { createTaskSchema, updateTaskSchema, paramIdSchema, paramListIdSchema } from "../utils/validation/taskSchemas.js";
 import { requireAuth } from "../auth/auth.middleware.js";
 
 const router = Router();
 const controller = new TaskController();
 
 // Get all tasks by list ID
-router.get(
-  "/list/:listId",
-  requireAuth,
-  validateParams(paramListIdSchema),
-  controller.getByList,
-);
-
-// Get a single task by ID
-router.get(
-  "/:id",
-  requireAuth,
-  validateParams(paramIdSchema),
-  controller.getById,
-);
+router.get("/list/:listId", requireAuth, validateParams(paramListIdSchema), controller.getByList);
 
 // Create a new task
-router.post(
-  "/",
-  requireAuth,
-  validateBody(createTaskSchema),
-  controller.create,
-);
+router.post("/", requireAuth, validateBody(createTaskSchema), controller.create);
 
 // Update an existing task
 router.put(
@@ -47,11 +24,6 @@ router.put(
 );
 
 // Delete a task by ID
-router.delete(
-  "/:id",
-  requireAuth,
-  validateParams(paramIdSchema),
-  controller.delete,
-);
+router.delete("/:id", requireAuth, validateParams(paramIdSchema), controller.delete);
 
 export default router;

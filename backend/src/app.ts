@@ -1,7 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
 import helmet from "helmet";
-import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 import { connectDB } from "./config/db.js";
 import { ENV } from "./config/env.js";
@@ -28,17 +27,6 @@ app.use(
   }),
 );
 
-// Rate limiter for authentication routes
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  limit: 10,
-  message: {
-    error: "Too many authentication attempts, please try again later.",
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
 // Parse JSON and cookies
 app.use(express.json());
 app.use(cookieParser());
@@ -50,7 +38,7 @@ connectDB(ENV.MONGO_URI);
 app.use("/api/users", userRoutes);
 app.use("/api/lists", todoListRoutes);
 app.use("/api/tasks", taskRoutes);
-app.use("/auth", authLimiter, authRoutes);
+app.use("/api/auth", authRoutes);
 
 // Global error handler (should be last)
 app.use(errorHandler);

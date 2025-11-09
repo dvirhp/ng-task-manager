@@ -1,10 +1,5 @@
 import Joi from "joi";
-import {
-  stringMin2,
-  emailSchema,
-  passwordSchema,
-  objectIdSchema,
-} from "./commonSchemas.js";
+import { stringMin2, emailSchema, passwordSchema, paramSchemas } from "./commonSchemas.js";
 
 // Validation for creating a new user
 export const createUserSchema = Joi.object({
@@ -20,7 +15,5 @@ export const updateUserSchema = Joi.object({
   password: passwordSchema,
 }).min(1); // Require at least one field for update
 
-// Validation for user ID parameter
-export const paramIdSchema = Joi.object({
-  id: objectIdSchema.required(),
-});
+// Use shared param schema
+export const paramIdSchema = paramSchemas.id;

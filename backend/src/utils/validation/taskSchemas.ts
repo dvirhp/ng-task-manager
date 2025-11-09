@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { stringMin2, objectIdSchema } from "./commonSchemas.js";
+import { stringMin2, objectIdSchema, paramSchemas } from "./commonSchemas.js";
 
 // Validation for creating a new task
 export const createTaskSchema = Joi.object({
@@ -20,12 +20,6 @@ export const updateTaskSchema = Joi.object({
   dueDate: Joi.date(),
 }).min(1); // Require at least one field to update
 
-// Validation for task ID parameter
-export const paramIdSchema = Joi.object({
-  id: objectIdSchema.required(),
-});
-
-// Validation for list ID parameter
-export const paramListIdSchema = Joi.object({
-  listId: objectIdSchema.required(),
-});
+// Reuse shared param schemas
+export const paramIdSchema = paramSchemas.id;
+export const paramListIdSchema = paramSchemas.listId;

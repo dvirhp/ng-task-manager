@@ -1,0 +1,16 @@
+<!-- Top navigation toolbar -->
+<mat-toolbar class="toolbar" color="primary" dir="ltr">
+  <span class="logo"><strong>Task Manager</strong></span>
+  <span class="spacer"></span>
+
+  <!-- Navigation button to lists page -->
+  <button mat-button class="nav-btn" (click)="goToLists()">My Lists</button>
+
+  <!-- Logout button -->
+  <button mat-raised-button color="warn" class="logout-btn" (click)="onLogout()">Logout</button>
+</mat-toolbar>
+
+<!-- Main content area -->
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,36 @@
+<!-- Dialog container for add/edit form -->
+<div class="dialog-wrapper responsive-dialog" dir="ltr">
+
+  <!-- Dialog title (changes based on mode) -->
+  <h2>{{ data ? 'Edit' : 'Add New' }}</h2>
+
+  <!-- Title input field -->
+  <div class="form-group">
+    <input
+      type="text"
+      [(ngModel)]="title"
+      [placeholder]="data?.type === 'task' ? 'Task title' : 'List title'"
+      class="input-field"
+    />
+  </div>
+
+  <!-- Description input area -->
+  <div class="form-group">
+    <textarea
+      [(ngModel)]="description"
+      [placeholder]="
+        data?.type === 'task' ? 'Task description (optional)' : 'List description (optional)'
+      "
+      class="textarea-field"
+      rows="4"
+    ></textarea>
+  </div>
+
+  <!-- Dialog action buttons -->
+  <div class="actions">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="save()" [disabled]="!title.trim()">
+      Save
+    </button>
+  </div>
+</div>

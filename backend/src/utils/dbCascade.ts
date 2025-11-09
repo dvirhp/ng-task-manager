@@ -22,9 +22,7 @@ export async function cascadeDeleteUser(userId: string): Promise<void> {
   if (listIds.length > 0) {
     await Task.deleteMany({ list: { $in: listIds } });
     await TodoList.deleteMany({ owner: userId });
-    console.log(
-      `Deleted ${listIds.length} lists and their tasks for user ${userId}`,
-    );
+    console.log(`Deleted ${listIds.length} lists and their tasks for user ${userId}`);
   } else {
     console.log(`No lists found for user ${userId}, nothing to delete`);
   }
@@ -42,9 +40,7 @@ export async function cascadeDeleteUsers(userIds: string[]): Promise<void> {
   if (listIds.length > 0) {
     await Task.deleteMany({ list: { $in: listIds } });
     await TodoList.deleteMany({ owner: { $in: userIds } });
-    console.log(
-      `Deleted ${listIds.length} lists and their tasks for ${userIds.length} users`,
-    );
+    console.log(`Deleted ${listIds.length} lists and their tasks for ${userIds.length} users`);
   } else {
     console.log(`No lists found for ${userIds.length} users`);
   }

@@ -1,0 +1,46 @@
+.page-container {
+  direction: ltr;
+  text-align: left;
+  background: linear-gradient(to bottom right, #f5faff, #e3f2fd);
+  min-height: 100vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.page-header {
+  text-align: center;
+
+  h1 {
+    color: #1565c0;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin-bottom: 0.4rem;
+  }
+
+  .subtitle {
+    color: #555;
+    font-size: 1rem;
+  }
+}
+
+.add-btn-container {
+  display: flex;
+  justify-content: center;
+
+  button {
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+}

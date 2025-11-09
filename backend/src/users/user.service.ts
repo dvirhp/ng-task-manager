@@ -2,17 +2,12 @@ import bcrypt from "bcrypt";
 import User, { IUser } from "./user.model.js";
 import { successResponse } from "../utils/core/ApiResponse.js";
 import { AppError } from "../utils/core/AppError.js";
-import { paginateQuery } from "../utils/core/pagination.js";
 
 export class UserService {
-  // Get all users with pagination
-  async getAll(page = 1, limit = 20) {
-    const result = await paginateQuery(User, {}, [], {
-      page,
-      limit,
-      maxLimit: 100,
-    });
-    return successResponse("Users fetched successfully", result);
+  // Get all users (no pagination)
+  async getAll() {
+    const users = await User.find().lean();
+    return successResponse("Users fetched successfully", users);
   }
 
   // Get user by ID
@@ -25,8 +20,7 @@ export class UserService {
   // Create a new user
   async create(data: Partial<IUser>) {
     const existing = await User.findOne({ email: data.email }).lean();
-    if (existing)
-      throw new AppError("User with this email already exists", 409);
+    if (existing) throw new AppError("User with this email already exists", 409);
 
     const user = new User(data);
     const saved = await user.save();

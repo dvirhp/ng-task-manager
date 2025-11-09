@@ -8,12 +8,8 @@ const userService = new UserService();
 
 export class UserController {
   // Get all users (restricted, should be admin in the future)
-  getAll = asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
-    const { page, limit } = req.query;
-    const result = await userService.getAll(
-      page ? Number(page) : undefined,
-      limit ? Number(limit) : undefined,
-    );
+  getAll = asyncHandler(async (_req: AuthenticatedRequest, res: Response) => {
+    const result = await userService.getAll(); // בלי פרמטרים
     res.status(200).json(result);
   });
 
@@ -22,8 +18,7 @@ export class UserController {
     const { id } = req.params as { id: string };
 
     // Block if the user tries to access another account
-    if (req.user!.userId !== id)
-      throw new Error("Unauthorized: cannot access other users");
+    if (req.user!.userId !== id) throw new Error("Unauthorized: cannot access other users");
 
     const result = await userService.getById(id);
     res.status(200).json(result);
@@ -39,8 +34,7 @@ export class UserController {
   update = asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
     const { id } = req.params as { id: string };
 
-    if (req.user!.userId !== id)
-      throw new Error("Unauthorized: cannot update other users");
+    if (req.user!.userId !== id) throw new Error("Unauthorized: cannot update other users");
 
     const result = await userService.update(id, req.body);
     res.status(200).json(result);
@@ -50,8 +44,7 @@ export class UserController {
   delete = asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
     const { id } = req.params as { id: string };
 
-    if (req.user!.userId !== id)
-      throw new Error("Unauthorized: cannot delete other users");
+    if (req.user!.userId !== id) throw new Error("Unauthorized: cannot delete other users");
 
     const result = await userService.delete(id);
     res.status(200).json(result);

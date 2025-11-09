@@ -3,25 +3,26 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { AppError } from "../utils/core/AppError.js";
 import { ENV } from "../config/env.js";
 
-// Extend Request to include user data after authentication
+// Extend Express Request to include authenticated user data
 export interface AuthenticatedRequest extends Request {
-  user?: { userId: string; email: string };
+  user?: {
+    userId: string;
+    email: string;
+  };
 }
 
-// Define expected JWT payload shape
+// Define the expected structure of the JWT payload
 interface TokenPayload extends JwtPayload {
   userId: string;
   email: string;
 }
 
-export const requireAuth = (
-  req: AuthenticatedRequest,
-  _res: Response,
-  next: NextFunction,
-) => {
+// Middleware to verify JWT and attach user data to the request
+export const requireAuth = (req: AuthenticatedRequest, _res: Response, next: NextFunction) => {
   const header = req.headers.authorization;
+
+  // Validate Authorization header format
   if (!header?.startsWith("Bearer ")) {
-    // Return instead of throwing may be cleaner for middleware
     throw new AppError("Missing or invalid Authorization header", 401);
   }
 
@@ -29,20 +30,23 @@ export const requireAuth = (
   if (!token) throw new AppError("Missing access token", 401);
 
   try {
-    const decoded = jwt.verify(
-      token,
-      ENV.JWT_SECRET as string,
-    ) as unknown as TokenPayload;
+    // Verify and decode the JWT
+    const decoded = jwt.verify(token, ENV.JWT_SECRET as string) as TokenPayload;
 
+    // Validate payload structure
     if (!decoded.userId || !decoded.email) {
       throw new AppError("Invalid token payload", 401);
     }
 
-    // Attach decoded user to request for next handlers
-    req.user = { userId: decoded.userId, email: decoded.email };
+    // Attach user info to the request for downstream middleware
+    req.user = {
+      userId: decoded.userId,
+      email: decoded.email,
+    };
+
     next();
   } catch (err) {
-    // Consider logging the actual error for debugging
+    // Token is invalid or expired
     throw new AppError("Invalid or expired token", 401);
   }
 };

@@ -1,0 +1,55 @@
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #f5faff, #e3f2fd);
+  direction: ltr; /* ✅ מוודא שהתוכן מיושר לשמאל */
+  text-align: left;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.2rem;
+  color: #1565c0;
+}
+
+.full {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.submit-btn {
+  width: 100%;
+  font-weight: 600;
+}
+
+.switch {
+  text-align: center;
+  margin-top: 1rem;
+
+  a {
+    color: #1565c0;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.error {
+  color: #d32f2f;
+  text-align: center;
+  margin-top: 0.8rem;
+}

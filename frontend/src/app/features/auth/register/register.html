@@ -1,0 +1,80 @@
+<div class="auth-wrapper" dir="ltr">
+  <mat-card class="auth-card">
+    <h2>Sign up for Task Manager</h2>
+
+    <!-- Registration form -->
+    <form (ngSubmit)="onSubmit()" #f="ngForm" class="auth-form" autocomplete="off">
+
+      <!-- Full name field -->
+      <mat-form-field appearance="fill" class="full">
+        <mat-label>Full name</mat-label>
+        <input
+          matInput
+          name="name"
+          [(ngModel)]="name"
+          required
+          placeholder="Enter your full name"
+        />
+      </mat-form-field>
+
+      <!-- Email field -->
+      <mat-form-field appearance="fill" class="full">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+          placeholder="Enter your email address"
+        />
+      </mat-form-field>
+
+      <!-- Password field -->
+      <mat-form-field appearance="fill" class="full">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+          placeholder="Enter your password"
+        />
+      </mat-form-field>
+
+      <!-- Confirm password field -->
+      <mat-form-field appearance="fill" class="full">
+        <mat-label>Confirm password</mat-label>
+        <input
+          matInput
+          type="password"
+          name="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          required
+          placeholder="Re-enter your password"
+        />
+      </mat-form-field>
+
+      <!-- Submit button -->
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-btn"
+        type="submit"
+        [disabled]="!f.valid || loading"
+      >
+        {{ loading ? 'Signing up...' : 'Register' }}
+      </button>
+
+      <!-- Error message display -->
+      <p class="error" *ngIf="error">{{ error }}</p>
+
+      <!-- Link to login page -->
+      <div class="switch">
+        <span>Already have an account?</span>
+        <a routerLink="/auth/login">Login here</a>
+      </div>
+    </form>
+  </mat-card>
+</div>

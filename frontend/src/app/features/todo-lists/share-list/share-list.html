@@ -1,0 +1,75 @@
+<div class="share-page" dir="ltr" *ngIf="!loading && list">
+  <mat-card class="share-card">
+    <h2>Share list: {{ list.title }}</h2>
+    <p class="description">{{ list.description || 'No description' }}</p>
+
+    <!-- Share input section (only owner can share) -->
+    <div class="share-actions" *ngIf="isOwner">
+      <input
+        type="email"
+        [(ngModel)]="emailToShare"
+        placeholder="Enter email to share with"
+        class="share-input"
+      />
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="shareList()"
+        [disabled]="!emailToShare.trim()"
+      >
+        Share
+      </button>
+    </div>
+
+    <!-- List owner section -->
+    <div class="list-owner" *ngIf="list.owner">
+      <h3>List owner</h3>
+      <div class="owner-card">
+        <span class="owner-name">
+          {{ list.owner.name || list.owner.email }} <strong>(Admin)</strong>
+        </span>
+      </div>
+    </div>
+
+    <!-- Shared users list -->
+    <div class="shared-users" *ngIf="list.sharedWith.length > 0">
+      <h3>Shared with</h3>
+      <ul>
+        <li *ngFor="let user of list.sharedWith">
+          <span class="user-name">{{ user.name || user.email }}</span>
+
+          <!-- Show remove button only if current user is owner -->
+          <button
+            *ngIf="isOwner"
+            mat-icon-button
+            color="warn"
+            matTooltip="Remove access"
+            (click)="removeUser(user._id)"
+          >
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Footer section with leave and back buttons -->
+    <div class="footer">
+      <!-- Leave list button (only for non-owners) -->
+      <button *ngIf="!isOwner" mat-flat-button color="warn" class="leave-btn" (click)="leaveList()">
+        <mat-icon>logout</mat-icon>
+        Leave list
+      </button>
+
+      <!-- Back button -->
+      <button mat-stroked-button color="accent" class="back-btn" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Back to lists
+      </button>
+    </div>
+  </mat-card>
+</div>
+
+<!-- Loading spinner -->
+<div *ngIf="loading" class="spinner">
+  <mat-spinner color="accent"></mat-spinner>
+</div>

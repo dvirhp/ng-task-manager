@@ -26,11 +26,7 @@ export function successResponse<T>(
 }
 
 // Build error response object
-export function errorResponse<T>(
-  message: string,
-  status: number = 500,
-  data?: T,
-): ApiResponse<T> {
+export function errorResponse<T>(message: string, status: number = 500, data?: T): ApiResponse<T> {
   const response: any = {
     success: false,
     status,
