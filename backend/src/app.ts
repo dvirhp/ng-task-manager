@@ -12,6 +12,8 @@ import { errorHandler } from "./middlewares/errorHandler.middleware.js";
 
 const app: Application = express();
 
+app.set("trust proxy", 1);
+
 // Apply security middlewares
 app.use(
   helmet({

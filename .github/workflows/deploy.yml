@@ -1,0 +1,45 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main # Trigger pipeline on push to main branch
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner (default, fast, reliable)
+
+    steps:
+      # Step 1: Checkout repository from GitHub
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js (choose version 22 for consistency)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Step 3: Install backend dependencies
+      - name: Install backend dependencies
+        run: npm install --prefix backend
+
+      # Step 4: Build backend (TypeScript → JavaScript)
+      - name: Build backend
+        run: npm run build --prefix backend
+
+      # Step 5: Run backend tests
+      - name: Run backend tests
+        run: npm test --prefix backend
+
+      # Step 6: Install frontend dependencies
+      - name: Install frontend dependencies
+        run: npm install --prefix frontend
+
+      # Step 7: Build frontend (Angular production build)
+      - name: Build frontend
+        run: npm run build --prefix frontend
+
+      # Step 8: Success message
+      - name: Pipeline finished
+        run: echo "CI/CD pipeline completed successfully!"
