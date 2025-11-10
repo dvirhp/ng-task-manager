@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "dist/server.js",
   "type": "module",
-  "scripts": {
-    "dev": "tsx src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "format": "prettier --write \"src/**/*.{ts,js,json,md}\""
-  },
+"scripts": {
+  "dev": "tsx src/server.ts",
+  "build": "npm install @types/node --no-save && tsc",
+  "start": "node dist/server.js",
+  "format": "prettier --write \"src/**/*.{ts,js,json,md}\""
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
