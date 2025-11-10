@@ -22,12 +22,16 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   // Send login request and store tokens if successful
-  login(data: LoginRequest): Observable<ApiResponse<{ accessToken: string; refreshToken?: string }>> {
+  login(
+    data: LoginRequest,
+  ): Observable<ApiResponse<{ accessToken: string; refreshToken?: string }>> {
     return this.postAndStore<{ accessToken: string; refreshToken?: string }>('login', data);
   }
 
   // Send registration request and store tokens if successful
-  register(data: RegisterRequest): Observable<ApiResponse<{ accessToken: string; refreshToken?: string }>> {
+  register(
+    data: RegisterRequest,
+  ): Observable<ApiResponse<{ accessToken: string; refreshToken?: string }>> {
     return this.postAndStore<{ accessToken: string; refreshToken?: string }>('register', data);
   }
 

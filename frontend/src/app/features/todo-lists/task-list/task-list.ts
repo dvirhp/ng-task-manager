@@ -21,7 +21,11 @@ export class TaskListComponent extends BaseCrudComponent<Task> {
   subtitle = 'Click a task to toggle its status or edit it';
   listId!: string;
 
-  constructor(private taskService: TaskService, dialog: MatDialog, private route: ActivatedRoute) {
+  constructor(
+    private taskService: TaskService,
+    dialog: MatDialog,
+    private route: ActivatedRoute,
+  ) {
     super(dialog);
     this.listId = this.route.snapshot.paramMap.get('listId')!;
   }

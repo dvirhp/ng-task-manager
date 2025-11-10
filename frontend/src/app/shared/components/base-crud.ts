@@ -36,8 +36,14 @@ export abstract class BaseCrudComponent<T> implements OnInit {
   }
 
   // Open dialog for add or edit and handle the result
-  openDialog(type: 'add' | 'edit', data?: Partial<T> & { _id?: string }, entity: 'list' | 'task' = 'list'): void {
-    const dialogData = data ? { title: (data as any).title, description: (data as any).description } : {};
+  openDialog(
+    type: 'add' | 'edit',
+    data?: Partial<T> & { _id?: string },
+    entity: 'list' | 'task' = 'list',
+  ): void {
+    const dialogData = data
+      ? { title: (data as any).title, description: (data as any).description }
+      : {};
 
     openAddEditDialog(this.dialog, entity, dialogData)
       .pipe(
@@ -45,9 +51,7 @@ export abstract class BaseCrudComponent<T> implements OnInit {
           if (!result) return of(null);
 
           const action$ =
-            type === 'add'
-              ? this.createItem(result)
-              : this.updateItem((data as any)._id!, result);
+            type === 'add' ? this.createItem(result) : this.updateItem((data as any)._id!, result);
 
           return action$.pipe(
             tap(() => console.log(`${entity} ${type} succeeded`)),

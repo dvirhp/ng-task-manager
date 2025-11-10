@@ -23,27 +23,21 @@ export const routes: Routes = [
       {
         path: 'lists',
         loadComponent: () =>
-          import('./features/todo-lists/list-view/list-view').then(
-            (m) => m.ListViewComponent,
-          ),
+          import('./features/todo-lists/list-view/list-view').then((m) => m.ListViewComponent),
       },
 
       // Task page for a specific list
       {
         path: 'lists/:listId/tasks',
         loadComponent: () =>
-          import('./features/todo-lists/task-list/task-list').then(
-            (m) => m.TaskListComponent,
-          ),
+          import('./features/todo-lists/task-list/task-list').then((m) => m.TaskListComponent),
       },
 
       // Share list page
       {
         path: 'lists/:id/share',
         loadComponent: () =>
-          import('./features/todo-lists/share-list/share-list').then(
-            (m) => m.ShareListComponent,
-          ),
+          import('./features/todo-lists/share-list/share-list').then((m) => m.ShareListComponent),
       },
 
       // Internal default route after login

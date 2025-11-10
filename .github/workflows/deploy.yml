@@ -30,7 +30,7 @@ jobs:
 
       # Step 5: Run backend tests
       - name: Run backend tests
-        run: npm test --prefix backend
+        run: NODE_ENV=test npm test --prefix backend
 
       # Step 6: Install frontend dependencies
       - name: Install frontend dependencies

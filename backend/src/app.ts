@@ -43,7 +43,6 @@ app.get("/api/health", (_, res) => {
   res.status(200).json({ success: true });
 });
 
-
 // Register routes
 app.use("/api/users", userRoutes);
 app.use("/api/lists", todoListRoutes);

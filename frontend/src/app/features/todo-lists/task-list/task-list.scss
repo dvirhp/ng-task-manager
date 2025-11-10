@@ -13,7 +13,9 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 
   &:hover {
     transform: translateY(-2px);
@@ -39,7 +41,9 @@
     border-radius: 8px;
     padding: 0.4rem 1rem;
     cursor: pointer;
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    transition:
+      transform 0.15s ease,
+      opacity 0.15s ease;
 
     &.done-btn {
       background-color: #c8e6c9;

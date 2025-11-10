@@ -2,7 +2,12 @@ import { Router } from "express";
 import { TaskController } from "./task.controller.js";
 import { validateBody } from "../middlewares/validation/validateBody.middleware.js";
 import { validateParams } from "../middlewares/validation/validateParams.middleware.js";
-import { createTaskSchema, updateTaskSchema, paramIdSchema, paramListIdSchema } from "../utils/validation/taskSchemas.js";
+import {
+  createTaskSchema,
+  updateTaskSchema,
+  paramIdSchema,
+  paramListIdSchema,
+} from "../utils/validation/taskSchemas.js";
 import { requireAuth } from "../auth/auth.middleware.js";
 
 const router = Router();

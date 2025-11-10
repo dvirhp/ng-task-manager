@@ -12,19 +12,17 @@ export interface ITodoList extends Document {
 }
 
 // Define the TodoList schema
-const todoListSchema = new Schema<ITodoList>(
-  {
-    title: { type: String, required: true, trim: true, minlength: 2 },
-    description: { type: String, default: "" },
-    owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-      index: true,
-    },
-    sharedWith: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+const todoListSchema = new Schema<ITodoList>({
+  title: { type: String, required: true, trim: true, minlength: 2 },
+  description: { type: String, default: "" },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+    index: true,
   },
-);
+  sharedWith: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+});
 
 // Virtual population for tasks related to this list
 todoListSchema.virtual("tasks", {

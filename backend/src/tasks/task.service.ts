@@ -10,7 +10,8 @@ export class TaskService {
     if (!list) throw new AppError("List not found", 404);
 
     // Check if user is either owner or shared participant
-    const isAuthorized = list.owner.toString() === userId || list.sharedWith.some((u) => u.toString() === userId);
+    const isAuthorized =
+      list.owner.toString() === userId || list.sharedWith.some((u) => u.toString() === userId);
 
     if (!isAuthorized) throw new AppError("Unauthorized", 403);
   }
@@ -46,7 +47,8 @@ export class TaskService {
     if (!task) throw new AppError("Task not found", 404);
 
     const list = task.list as any;
-    const isAuthorized = list.owner.toString() === userId || list.sharedWith.some((u: any) => u.toString() === userId);
+    const isAuthorized =
+      list.owner.toString() === userId || list.sharedWith.some((u: any) => u.toString() === userId);
 
     if (!isAuthorized) throw new AppError("Unauthorized", 403);
 

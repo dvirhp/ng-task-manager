@@ -36,16 +36,20 @@ export class TaskService {
   // Create a new task under a given list
   create(listId: string, data: { title: string; description?: string }): Observable<Task> {
     const payload = { ...data, list: listId };
-    return this.http
-      .post<ApiResponse<Task>>(this.baseUrl, payload, { headers: this.headers })
-      .pipe(map((res) => res.data), catchError(this.handleError));
+    return this.http.post<ApiResponse<Task>>(this.baseUrl, payload, { headers: this.headers }).pipe(
+      map((res) => res.data),
+      catchError(this.handleError),
+    );
   }
 
   // Update an existing task by its ID
   update(id: string, data: Partial<Task>): Observable<Task> {
     return this.http
       .put<ApiResponse<Task>>(`${this.baseUrl}/${id}`, data, { headers: this.headers })
-      .pipe(map((res) => res.data), catchError(this.handleError));
+      .pipe(
+        map((res) => res.data),
+        catchError(this.handleError),
+      );
   }
 
   // Delete a task by its ID

@@ -19,7 +19,11 @@ export class ListViewComponent extends BaseCrudComponent<TodoList> {
   title = 'My To-Do Lists';
   subtitle = 'Click a list name to view its tasks';
 
-  constructor(private listService: TodoListService, dialog: MatDialog, private router: Router) {
+  constructor(
+    private listService: TodoListService,
+    dialog: MatDialog,
+    private router: Router,
+  ) {
     super(dialog);
   }
 

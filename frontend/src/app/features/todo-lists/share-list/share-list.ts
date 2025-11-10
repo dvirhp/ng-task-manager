@@ -21,7 +21,7 @@ export class ShareListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private todoListService: TodoListService
+    private todoListService: TodoListService,
   ) {}
 
   ngOnInit(): void {
@@ -36,8 +36,8 @@ export class ShareListComponent implements OnInit {
       (err?.status === 404
         ? 'User not found'
         : err?.status === 409
-        ? 'User already added'
-        : fallbackMessage);
+          ? 'User already added'
+          : fallbackMessage);
     alert(msg);
     console.error('API error:', err);
   }
@@ -105,15 +105,13 @@ export class ShareListComponent implements OnInit {
 
   // Leave a shared list (for non-owner users)
   leaveList(): void {
-    this.todoListService
-      .removeSharedUser(this.list._id)
-      .subscribe({
-        next: () => {
-          alert('You have left the list');
-          this.router.navigate(['/lists']);
-        },
-        error: (err) => this.handleError(err, 'Error leaving list'),
-      });
+    this.todoListService.removeSharedUser(this.list._id).subscribe({
+      next: () => {
+        alert('You have left the list');
+        this.router.navigate(['/lists']);
+      },
+      error: (err) => this.handleError(err, 'Error leaving list'),
+    });
   }
 
   // Navigate back to the lists page
