@@ -39,6 +39,11 @@ app.use(cookieParser());
 // Connect to MongoDB
 connectDB(ENV.MONGO_URI);
 
+app.get("/api/health", (_, res) => {
+  res.status(200).json({ success: true });
+});
+
+
 // Register routes
 app.use("/api/users", userRoutes);
 app.use("/api/lists", todoListRoutes);
