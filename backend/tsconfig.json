@@ -8,8 +8,8 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "target": "ES2020",
-    "module": "NodeNext",            // ✅ must match moduleResolution
-    "moduleResolution": "NodeNext",  // ✅ fixed for Node environment
+    "module": "NodeNext", // ✅ must match moduleResolution
+    "moduleResolution": "NodeNext", // ✅ fixed for Node environment
     "lib": ["esnext"],
     "esModuleInterop": true,
     "types": ["node"],
