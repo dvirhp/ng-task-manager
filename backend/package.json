@@ -4,11 +4,11 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "dev": "tsx src/server.ts",
-    "build": "npm install @types/node --no-save && tsc",
-    "start": "node dist/server.js",
-    "format": "prettier --write \"src/**/*.{ts,js,json,md}\"",
-    "test": "node --test tests/**/*.test.js"
+  "dev": "tsx src/server.ts",
+  "build": "npm install @types/node --no-save && tsc",
+  "start": "node dist/server.js",
+  "format": "prettier --write \"src/**/*.{ts,js,json,md}\"",
+  "test": "npm run build && node --test tests/**/*.test.js"
   },
   "keywords": [],
   "author": "",
