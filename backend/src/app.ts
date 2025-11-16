@@ -26,7 +26,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:4200", // local dev
-      "https://ng-task-manager-ka2b0r26e-dvirhps-projects.vercel.app", // Vercel production
+      "https://ng-task-manager-ivory.vercel.app", // Vercel production
     ],
     credentials: true,
   }),
